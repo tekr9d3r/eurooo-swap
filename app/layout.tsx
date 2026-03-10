@@ -8,9 +8,39 @@ import { ThemeProvider } from '@/components/theme-provider';
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
 export const metadata: Metadata = {
-  title: 'Eurooo Swap',
-  description: 'Cross-chain swap powered by Li.Fi',
-  icons: { icon: '/favicon.ico' },
+  title: 'Eurooo Swap — Swap EUR Stablecoins Cross-Chain',
+  description: 'Swap EUR stablecoins like EURC, EURS and EURe across multiple blockchains. Powered by Li.Fi. Fast, secure, non-custodial.',
+  metadataBase: new URL('https://swap.eurooo.xyz'),
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/logo.png',
+  },
+  openGraph: {
+    type: 'website',
+    url: 'https://swap.eurooo.xyz',
+    siteName: 'Eurooo Swap',
+    title: 'Eurooo Swap — Swap EUR Stablecoins Cross-Chain',
+    description: 'Swap EUR stablecoins like EURC, EURS and EURe across multiple blockchains. Powered by Li.Fi. Fast, secure, non-custodial.',
+    images: [
+      {
+        url: '/website-preview-eurooo-swap.png',
+        width: 1200,
+        height: 630,
+        alt: 'Eurooo Swap — Swap EUR Stablecoins Cross-Chain',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@tekr0x',
+    title: 'Eurooo Swap — Swap EUR Stablecoins Cross-Chain',
+    description: 'Swap EUR stablecoins like EURC, EURS and EURe across multiple blockchains. Powered by Li.Fi.',
+    images: ['/website-preview-eurooo-swap.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
