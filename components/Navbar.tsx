@@ -31,9 +31,7 @@ export default function Navbar() {
           {/* BEER pill */}
           <a
             href="https://luma.com/mznyc1io"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-full border border-border/60 bg-secondary/50"
+                        className="hidden sm:flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-full border border-border/60 bg-secondary/50"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
             B€€R. Euros. DeFi.
@@ -42,9 +40,7 @@ export default function Navbar() {
           {/* Knowledge Hub */}
           <a
             href="https://hub.eurooo.xyz/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1"
+                        className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1"
           >
             <span>📚</span>
             <span className="hidden sm:inline">Knowledge Hub</span>
@@ -53,9 +49,7 @@ export default function Navbar() {
           {/* Stats */}
           <a
             href="https://www.eurooo.xyz/stats"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1"
+                        className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1"
           >
             <span>📊</span>
             <span className="hidden sm:inline">Stats</span>
@@ -64,9 +58,7 @@ export default function Navbar() {
           {/* Earn CTA */}
           <a
             href="https://www.eurooo.xyz/app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium text-primary-foreground h-9 rounded-md px-3 gap-1 bg-primary hover:bg-primary/90 shadow-md transition-colors"
+                        className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium text-primary-foreground h-9 rounded-md px-3 gap-1 bg-primary hover:bg-primary/90 shadow-md transition-colors"
           >
             Earn
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">

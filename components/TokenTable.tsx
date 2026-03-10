@@ -52,7 +52,7 @@ function CopyButton({ text }: { text: string }) {
 
 export default function TokenTable() {
   return (
-    <section className="w-full max-w-3xl mx-auto px-4 pb-16">
+    <section className="w-full max-w-4xl mx-auto px-4 pb-16">
       <div className="mb-6 text-center">
         <h2 className="text-xl font-semibold text-foreground">EUR Stablecoin Contract Addresses</h2>
         <p className="text-sm text-muted-foreground mt-1">Click copy to grab a contract address</p>
@@ -64,16 +64,16 @@ export default function TokenTable() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border bg-secondary/40">
-                <th className="text-left px-5 py-3 text-muted-foreground font-medium">Token</th>
-                <th className="text-left px-5 py-3 text-muted-foreground font-medium">Chain</th>
-                <th className="text-left px-5 py-3 text-muted-foreground font-medium">Contract Address</th>
-                <th className="px-5 py-3" />
+                <th className="text-left px-4 py-3 text-muted-foreground font-medium">Token</th>
+                <th className="text-left px-4 py-3 text-muted-foreground font-medium">Chain</th>
+                <th className="text-left px-4 py-3 text-muted-foreground font-medium">Contract Address</th>
+                <th className="px-4 py-3" />
               </tr>
             </thead>
             <tbody>
               {TOKENS.map((row, i) => (
                 <tr key={i} className="border-b border-border/50 last:border-0 hover:bg-secondary/20 transition-colors">
-                  <td className="px-5 py-3">
+                  <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       <div className="w-7 h-7 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">
                         €
@@ -81,16 +81,15 @@ export default function TokenTable() {
                       <span className="font-semibold text-foreground">{row.token}</span>
                     </div>
                   </td>
-                  <td className="px-5 py-3">
+                  <td className="px-4 py-3">
                     <span className="text-xs px-2 py-1 rounded-md bg-secondary text-muted-foreground font-medium">
                       {row.chain}
                     </span>
                   </td>
-                  <td className="px-5 py-3 font-mono text-sm text-foreground">
-                    <span className="hidden lg:inline">{row.address}</span>
-                    <span className="lg:hidden">{truncate(row.address)}</span>
+                  <td className="px-4 py-3 font-mono text-xs text-foreground">
+                    {row.address}
                   </td>
-                  <td className="px-5 py-3 text-right">
+                  <td className="px-4 py-3 text-right">
                     <CopyButton text={row.address} />
                   </td>
                 </tr>
