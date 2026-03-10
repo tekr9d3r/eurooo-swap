@@ -7,7 +7,7 @@ const stars = Array.from({ length: 12 }, (_, i) => i);
 
 export default function Home() {
   return (
-    <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%)', minHeight: '100vh' }}>
+    <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%)', minHeight: '100vh', overflowX: 'hidden' }}>
       {/* Widget section */}
       <div
         style={{
