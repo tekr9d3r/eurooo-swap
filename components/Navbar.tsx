@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 export default function Navbar() {
   return (
     <nav
@@ -25,20 +27,7 @@ export default function Navbar() {
         href="https://www.eurooo.xyz/"
         style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}
       >
-        <div
-          style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '50%',
-            background: 'linear-gradient(135deg, #003399 0%, #ffcc00 100%)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '16px',
-          }}
-        >
-          ★
-        </div>
+        <Image src="/logo.png" alt="Eurooo" width={36} height={36} style={{ objectFit: 'contain' }} />
         <span style={{ color: '#fff', fontWeight: 700, fontSize: '16px', letterSpacing: '-0.3px' }}>
           eurooo.xyz
         </span>
