@@ -62,10 +62,6 @@ fee: 0.01                  // 1% fee on all swaps
 variant: 'compact'
 ```
 
-Fee wallet addresses:
-- **EVM:** `0x5FfD23B1B0350debB17A2cB668929aC5f76d0E18`
-- **SVM (Solana):** `6xtfyyZNKcTQsuC5bEURb68ySSpQvNggEB8v1CfEdcMW`
-
 ---
 
 ## EUR stablecoin addresses
