@@ -88,7 +88,7 @@ export default function Navbar() {
           onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.07)')}
           onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
         >
-          📗 Knowledge Hub
+          📚 Knowledge Hub
         </a>
 
         {/* Stats */}
