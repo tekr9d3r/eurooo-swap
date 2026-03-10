@@ -1,139 +1,83 @@
 'use client';
 
 import Image from 'next/image';
+import { ThemeToggle } from './theme-toggle';
 
 export default function Navbar() {
   return (
-    <nav
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 1000,
-        height: '56px',
-        background: 'rgba(10, 14, 26, 0.85)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(255,255,255,0.07)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0 24px',
-      }}
-    >
-      {/* Logo */}
-      <a
-        href="https://www.eurooo.xyz/"
-        style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}
-      >
-        <Image src="/logo.png" alt="Eurooo" width={36} height={36} style={{ objectFit: 'contain' }} />
-        <span style={{ color: '#fff', fontWeight: 700, fontSize: '16px', letterSpacing: '-0.3px' }}>
-          eurooo.xyz
-        </span>
-      </a>
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-14 md:h-16 items-center justify-between px-4 mx-auto max-w-7xl">
 
-      {/* Nav links */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        {/* BEER EURO DEFI pill */}
+        {/* Logo + brand */}
         <a
-          href="https://luma.com/mznyc1io"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            background: 'rgba(255,255,255,0.08)',
-            border: '1px solid rgba(255,255,255,0.12)',
-            borderRadius: '999px',
-            padding: '5px 12px',
-            textDecoration: 'none',
-            color: '#e2e8f0',
-            fontSize: '13px',
-            fontWeight: 500,
-            whiteSpace: 'nowrap',
-          }}
+          href="https://www.eurooo.xyz/"
+          className="flex items-center gap-2 hover:opacity-80 transition-opacity"
         >
-          <span
-            style={{
-              width: '7px',
-              height: '7px',
-              borderRadius: '50%',
-              background: '#22c55e',
-              display: 'inline-block',
-              flexShrink: 0,
-            }}
+          <Image
+            src="/logo.png"
+            alt="eurooo.xyz"
+            width={40}
+            height={40}
+            className="h-10 w-10 md:h-14 md:w-14 object-contain"
           />
-          B€€R. Euros. DeFi.
+          <span className="hidden sm:inline text-xl font-semibold tracking-tight">
+            eurooo.xyz
+          </span>
         </a>
 
-        {/* Knowledge Hub */}
-        <a
-          href="https://hub.eurooo.xyz/"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            padding: '5px 12px',
-            textDecoration: 'none',
-            color: '#e2e8f0',
-            fontSize: '13px',
-            fontWeight: 500,
-            borderRadius: '8px',
-            transition: 'background 0.15s',
-          }}
-          onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.07)')}
-          onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
-        >
-          📚 Knowledge Hub
-        </a>
+        {/* Nav */}
+        <div className="flex items-center gap-1 sm:gap-2">
 
-        {/* Stats */}
-        <a
-          href="https://www.eurooo.xyz/stats"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            padding: '5px 12px',
-            textDecoration: 'none',
-            color: '#e2e8f0',
-            fontSize: '13px',
-            fontWeight: 500,
-            borderRadius: '8px',
-            transition: 'background 0.15s',
-          }}
-          onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.07)')}
-          onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
-        >
-          📊 Stats
-        </a>
+          {/* BEER pill */}
+          <a
+            href="https://luma.com/mznyc1io"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-full border border-border/60 bg-secondary/50"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
+            B€€R. Euros. DeFi.
+          </a>
 
-        {/* Earn CTA */}
-        <a
-          href="https://www.eurooo.xyz/app"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            padding: '7px 18px',
-            background: 'linear-gradient(135deg, #2563eb, #1d4ed8)',
-            borderRadius: '10px',
-            textDecoration: 'none',
-            color: '#fff',
-            fontSize: '13px',
-            fontWeight: 600,
-            letterSpacing: '0.1px',
-            boxShadow: '0 2px 8px rgba(37,99,235,0.4)',
-          }}
-        >
-          Earn →
-        </a>
+          {/* Knowledge Hub */}
+          <a
+            href="https://hub.eurooo.xyz/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1"
+          >
+            <span>📚</span>
+            <span className="hidden sm:inline">Knowledge Hub</span>
+          </a>
+
+          {/* Stats */}
+          <a
+            href="https://www.eurooo.xyz/stats"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1"
+          >
+            <span>📊</span>
+            <span className="hidden sm:inline">Stats</span>
+          </a>
+
+          {/* Earn CTA */}
+          <a
+            href="https://www.eurooo.xyz/app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium text-primary-foreground h-9 rounded-md px-3 gap-1 bg-primary hover:bg-primary/90 shadow-md transition-colors"
+          >
+            Earn
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+
+          <ThemeToggle />
+        </div>
       </div>
-    </nav>
+    </header>
   );
 }
