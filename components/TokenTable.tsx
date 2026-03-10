@@ -2,20 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
-// Primary contract addresses per token (Ethereum mainnet unless noted)
-const TOKEN_ADDRESSES: Record<string, { address: string; chain: string }> = {
-  'EURC':   { address: '0x1aBaEA1f7C830bD89Acc67eC4af516284b1bC33c', chain: 'Ethereum' },
-  'EURS':   { address: '0xdB25f211AB05b1c97D595516F45794528a807ad8', chain: 'Ethereum' },
-  'EURe':   { address: '0x3231Cb76718CDeF2155FC47b5286d82e6eDA273f', chain: 'Ethereum' },
-  'EURA':   { address: '0x1a7e4e63778B4f12a199C062f3eFdD288afCBce8', chain: 'Ethereum' },
-  'EURCV':  { address: '0x5f7827FDeb7c20b443265Fc2F40845B715385Ff2', chain: 'Ethereum' },
-  'EURT':   { address: '0xC581b735A1688071A1746c968e0798D642EDE491', chain: 'Ethereum' },
-  'EUROe':  { address: '0x820802Fa8a99901F52e39acD21177b0BE6EE2974', chain: 'Ethereum' },
-  'agEUR':  { address: '0x1a7e4e63778B4f12a199C062f3eFdD288afCBce8', chain: 'Ethereum' },
-  'jEUR':   { address: '0x4e3Decbb3645551B8A19f0eA1678079FCB33fB4c', chain: 'Polygon' },
-  'PAR':    { address: '0x68037790A0229e9Ce6EaA8A99ea92964106C4703', chain: 'Ethereum' },
-  'cEUR':   { address: '0xD8763CBa276a3738E6DE85b4b3bF5FDed6D6cA73', chain: 'Celo' },
-};
+// Chain priority for address display — prefer more popular chains
+const CHAIN_PRIORITY = ['Ethereum', 'Base', 'Solana', 'Polygon', 'Avalanche', 'Arbitrum', 'Optimism', 'Gnosis', 'BSC', 'Celo'];
 
 interface Token {
   name: string;
@@ -34,7 +22,42 @@ function formatMarketCap(value: number): string {
 }
 
 function truncate(addr: string) {
+  if (addr.length < 20) return addr;
   return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
+}
+
+/** Extract best address from a DefiLlama stablecoin detail response */
+function extractAddress(detail: any): { address: string; chain: string } | null {
+  // Try chainBalances first (most reliable)
+  const balances: Record<string, any> = detail?.chainBalances ?? {};
+
+  // Try chains in priority order
+  for (const chain of CHAIN_PRIORITY) {
+    const entry = balances[chain];
+    const tokens: any[] = entry?.tokens ?? [];
+    const addr = tokens[0]?.address;
+    if (addr && addr !== '0x0000000000000000000000000000000000000000') {
+      return { address: addr, chain };
+    }
+  }
+
+  // Fall back to any chain with an address
+  for (const [chain, entry] of Object.entries(balances)) {
+    const tokens: any[] = (entry as any)?.tokens ?? [];
+    const addr = tokens[0]?.address;
+    if (addr && addr !== '0x0000000000000000000000000000000000000000') {
+      return { address: addr, chain };
+    }
+  }
+
+  // Top-level address field (e.g. "ethereum:0x...")
+  if (detail?.address && typeof detail.address === 'string') {
+    const parts = detail.address.split(':');
+    if (parts.length === 2) return { address: parts[1], chain: parts[0] };
+    return { address: detail.address, chain: '' };
+  }
+
+  return null;
 }
 
 function CopyButton({ text }: { text: string }) {
@@ -74,31 +97,44 @@ export default function TokenTable() {
   useEffect(() => {
     async function fetchData() {
       try {
+        // Step 1: get list + market caps
         const res = await fetch('https://stablecoins.llama.fi/stablecoins');
         const data = await res.json();
 
-        const eurTokens = (data.peggedAssets as any[])
+        const top10 = (data.peggedAssets as any[])
           .filter((t: any) => t.pegType === 'peggedEUR')
-          .map((t: any) => {
-            const mcap =
-              t.circulating?.peggedEUR ??
-              t.circulatingPrevDay?.peggedEUR ??
-              0;
-            const addr = TOKEN_ADDRESSES[t.symbol] ?? TOKEN_ADDRESSES[t.name];
-            return {
-              name: t.name,
-              symbol: t.symbol,
-              marketCap: mcap,
-              chains: (t.chains ?? []).slice(0, 6),
-              address: addr?.address ?? '—',
-              addressChain: addr?.chain ?? '',
-            };
-          })
-          .filter((t: Token) => t.marketCap > 0)
-          .sort((a: Token, b: Token) => b.marketCap - a.marketCap)
+          .map((t: any) => ({
+            id: t.id,
+            name: t.name,
+            symbol: t.symbol,
+            marketCap: t.circulating?.peggedEUR ?? t.circulatingPrevDay?.peggedEUR ?? 0,
+            chains: (t.chains ?? []).slice(0, 6),
+          }))
+          .filter((t: any) => t.marketCap > 0)
+          .sort((a: any, b: any) => b.marketCap - a.marketCap)
           .slice(0, 10);
 
-        setTokens(eurTokens);
+        // Step 2: fetch details for each token in parallel to get addresses
+        const details = await Promise.allSettled(
+          top10.map((t: any) =>
+            fetch(`https://stablecoins.llama.fi/stablecoin/${t.id}`).then(r => r.json())
+          )
+        );
+
+        const result: Token[] = top10.map((t: any, i: number) => {
+          const detail = details[i].status === 'fulfilled' ? details[i].value : null;
+          const addr = extractAddress(detail);
+          return {
+            name: t.name,
+            symbol: t.symbol,
+            marketCap: t.marketCap,
+            chains: t.chains,
+            address: addr?.address ?? '—',
+            addressChain: addr?.chain ?? '',
+          };
+        });
+
+        setTokens(result);
       } catch {
         setError(true);
       } finally {
