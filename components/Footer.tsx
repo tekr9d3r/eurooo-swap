@@ -2,117 +2,90 @@
 
 import Image from 'next/image';
 
+const XIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
+const TelegramIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+  </svg>
+);
+
+const GitHubIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+  </svg>
+);
+
 export default function Footer() {
   return (
-    <footer
-      style={{
-        borderTop: '1px solid rgba(255,255,255,0.07)',
-        padding: '32px 24px',
-        marginTop: '64px',
-        background: 'rgba(10, 14, 26, 0.85)',
-      }}
-    >
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        {/* Top row */}
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '24px',
-          }}
-        >
-          {/* Logo + tagline */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+    <footer className="border-t border-border py-8 mt-16">
+      <div className="container">
+        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+
+          {/* Left: Logo and tagline */}
+          <div className="flex items-center gap-3">
             <Image
               src="/logo.png"
               alt="eurooo.xyz"
               width={32}
               height={32}
-              style={{ objectFit: 'contain' }}
+              className="h-8 w-8 rounded-lg object-contain"
             />
             <div>
-              <div style={{ color: '#fff', fontSize: '14px', fontWeight: 600 }}>eurooo.xyz</div>
-              <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: '12px' }}>
-                Grow Your Euros in DeFi.
-              </div>
+              <span className="text-sm font-medium">eurooo.xyz</span>
+              <p className="text-xs text-muted-foreground">Grow Your Euros in DeFi.</p>
             </div>
           </div>
 
-          {/* Social icons */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            {/* X / Twitter */}
+          {/* Center: Navigation links */}
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <a href="https://www.eurooo.xyz/app" className="hover:text-foreground transition-colors">Earn</a>
+            <a href="https://www.swap.eurooo.xyz/" className="hover:text-foreground transition-colors">Swap</a>
+            <a href="https://www.eurooo.xyz/stats" className="hover:text-foreground transition-colors">Stats</a>
+            <a href="https://hub.eurooo.xyz/" className="hover:text-foreground transition-colors">Learn</a>
+          </div>
+
+          {/* Right: Social links */}
+          <div className="flex items-center gap-4">
             <a
               href="https://x.com/tekr0x"
               target="_blank"
               rel="noopener noreferrer"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-muted-foreground transition-all duration-300 hover:bg-foreground hover:text-background hover:scale-110"
               aria-label="Follow on X"
-              style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                background: 'rgba(255,255,255,0.08)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'rgba(255,255,255,0.5)',
-                transition: 'background 0.15s, color 0.15s',
-                textDecoration: 'none',
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(255,255,255,0.9)';
-                (e.currentTarget as HTMLAnchorElement).style.color = '#000';
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(255,255,255,0.08)';
-                (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.5)';
-              }}
             >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-              </svg>
+              <XIcon className="h-4 w-4" />
             </a>
-
-            {/* Telegram */}
             <a
               href="https://t.me/+wxIKk-lsEy5kMGQ0"
               target="_blank"
               rel="noopener noreferrer"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-muted-foreground transition-all duration-300 hover:bg-[#0088cc] hover:text-white hover:scale-110"
               aria-label="Join our Telegram"
-              style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                background: 'rgba(255,255,255,0.08)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'rgba(255,255,255,0.5)',
-                transition: 'background 0.15s, color 0.15s',
-                textDecoration: 'none',
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLAnchorElement).style.background = '#0088cc';
-                (e.currentTarget as HTMLAnchorElement).style.color = '#fff';
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(255,255,255,0.08)';
-                (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.5)';
-              }}
             >
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
-              </svg>
+              <TelegramIcon className="h-5 w-5" />
+            </a>
+            <a
+              href="https://github.com/tekr9d3r/eurooo.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-muted-foreground transition-all duration-300 hover:bg-foreground hover:text-background hover:scale-110"
+              aria-label="View on GitHub"
+            >
+              <GitHubIcon className="h-5 w-5" />
             </a>
           </div>
         </div>
 
-        {/* Divider */}
-        <div style={{ height: '1px', background: 'rgba(255,255,255,0.07)', margin: '24px 0' }} />
+        {/* Separator */}
+        <div className="my-6 h-px bg-border" />
 
-        {/* Disclaimer */}
-        <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '12px', textAlign: 'center', margin: 0 }}>
+        {/* Legal Disclaimer */}
+        <p className="text-xs text-muted-foreground text-center">
           eurooo.xyz is an interface for third-party DeFi protocols. Deposits go directly to protocols, not Eurooo.
         </p>
       </div>
