@@ -11,10 +11,10 @@ const LiFiWidget = dynamic(
 const widgetConfig: WidgetConfig = {
   integrator: 'Eurooo.xyz',
   variant: 'compact',
-  fee: 0.01,
+  fee: 0.0025,
   feeConfig: {
     name: 'Eurooo',
-    fee: 0.01,
+    fee: 0.0025,
     showFeePercentage: true,
     showFeeTooltip: true,
   },
